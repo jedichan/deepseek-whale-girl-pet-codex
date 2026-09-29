@@ -4,9 +4,11 @@
 
 ## 中文
 
-这是为 Codex 制作的 DeepSeek 鲸鱼娘桌宠。它包含九种标准动画和 16 个注视方向，并提供可安装文件、预览和完整的状态说明；不包含网站或插件运行时。
+这是为 Codex 制作的 DeepSeek 鲸鱼娘桌宠。它包含九种标准动画和取自原版转身动画的 16 个转向姿态，并提供可安装文件、预览和完整的状态说明；不包含网站或插件运行时。
 
-![DeepSeek 鲸鱼娘动画与注视方向预览](preview.png)
+![DeepSeek 鲸鱼娘动画与转身姿态预览](preview.png)
+
+![16 帧 360° 转身动图](turn-preview.gif)
 
 ### 功能与触发状态
 
@@ -24,26 +26,26 @@
 
 状态由 Codex 自动选择。鼠标悬停和拖动是可以直接手动触发的交互；其他状态取决于 Codex 当前任务状态，不需要在 README 中配置快捷键。
 
-### 注视方向
+### 22.5° 转身
 
-宠物会根据鼠标相对位置切换到最近的注视角度。角度从正上方开始顺时针计算，每 22.5° 一个姿势：
+Codex 根据鼠标相对宠物的位置计算角度：指针在上方时为 0°，顺时针每 22.5° 选取一帧。这里用原版 360° 转身动画逐帧取样，0° 显示正面、90° 显示右侧、180° 显示背面、270° 显示左侧：
 
-| 角度 | 注视方向 | 角度 | 注视方向 |
+| 角度 | 转身姿态 | 角度 | 转身姿态 |
 | ---: | --- | ---: | --- |
-| 000° | 上 | 180° | 下 |
-| 022.5° | 右上 | 202.5° | 左下 |
-| 045° | 右上 | 225° | 左下 |
-| 067.5° | 右上 | 247.5° | 左下 |
-| 090° | 右 | 270° | 左 |
-| 112.5° | 右下 | 292.5° | 左上 |
-| 135° | 右下 | 315° | 左上 |
-| 157.5° | 右下 | 337.5° | 左上 |
+| 000° | 正面 | 180° | 背面 |
+| 022.5° | 正面稍向右 | 202.5° | 背面稍向左 |
+| 045° | 右前侧 | 225° | 左后侧 |
+| 067.5° | 接近右侧 | 247.5° | 接近左侧 |
+| 090° | 右侧 | 270° | 左侧 |
+| 112.5° | 右后侧 | 292.5° | 左前侧 |
+| 135° | 接近背面 | 315° | 接近正面 |
+| 157.5° | 背面稍向右 | 337.5° | 正面稍向左 |
 
-指针处于宠物正前方的中性死区时使用普通 idle，而不是把 000° 当成正脸。16 个方向按一圈连续排列。
+Codex 只在 idle、running、waving 状态显示方向帧；悬停在宠物身上会触发 jumping，等待、失败和结果检查等状态也会覆盖方向帧。体验转身时，请把鼠标放在宠物周围、不要压在宠物图像上。Codex 按 22.5° 选取最接近的一张静态帧，图集本身无法修改选帧速度或增加帧间补间。
 
 ### 动画帧与图集布局
 
-图集使用 Codex V2 格式，尺寸为 1536 × 2288 像素；共 8 列 × 11 行，每格 192 × 208 像素。九种标准状态各占一行，最后两行合计 16 个注视姿势。
+图集使用 Codex V2 格式，尺寸为 1536 × 2288 像素；共 8 列 × 11 行，每格 192 × 208 像素。九种标准状态各占一行，最后两行合计 16 个转身姿势。
 
 | 行 | 状态 | 使用帧数 | 单帧显示时间 |
 | ---: | --- | ---: | --- |
@@ -56,7 +58,7 @@
 | 6 | waiting | 6 | 前 5 帧各 150 ms，末帧 260 ms |
 | 7 | running | 6 | 前 5 帧各 120 ms，末帧 220 ms |
 | 8 | review | 6 | 前 5 帧各 150 ms，末帧 280 ms |
-| 9–10 | 注视方向 | 16 | 按顺时针角度连续排列 |
+| 9–10 | 转身方向 | 16 | 顺时针每 22.5° 一帧 |
 
 pet.json 声明宠物 ID、显示名称、V2 版本号和图集文件名。动画状态及其触发由 Codex 控制。
 
@@ -79,12 +81,13 @@ macOS 或 Linux 可以在仓库目录运行：
 
 - pet.json：Codex 宠物清单。
 - spritesheet.webp：透明背景的 V2 动画图集。
-- preview.png：状态及视线方向预览图。
+- preview.png：状态及转身姿态预览图。
+- turn-preview.gif：16 个角度循环预览。
 - NOTICE.md：来源署名与素材使用说明。
 
 ### 校验情况
 
-图集已按 Codex V2 的尺寸、格数和清单格式校验，独立视觉检查通过。个别中间对角注视方向有轻微辨识度提示；四个主方向及整体方向循环通过检查。
+图集已按 Codex V2 的尺寸、格数、透明背景和清单格式校验。16 个转身帧来自同一段原版 360° 动画；待机帧去掉了末段突然转头，跳跃帧补齐下降和落地。转身的末帧切回首帧时，头发仍有轻微摆动差异。
 
 ### 来源与授权
 
@@ -103,9 +106,11 @@ macOS 或 Linux 可以在仓库目录运行：
 
 ## English
 
-This is a DeepSeek whale-girl desktop pet for Codex. It includes nine standard animations and a 16-direction gaze atlas, plus installable files, a preview, and a full state guide. It does not include website or plugin runtime code.
+This is a DeepSeek whale-girl desktop pet for Codex. It includes nine standard animations and 16 turning poses sampled from the original character animation, plus installable files, a preview, and a full state guide. It does not include website or plugin runtime code.
 
-![DeepSeek whale-girl animation and gaze preview](preview.png)
+![DeepSeek whale-girl animation and turning preview](preview.png)
+
+![16-frame 360-degree turn](turn-preview.gif)
 
 ### Features and triggers
 
@@ -123,26 +128,26 @@ This is a DeepSeek whale-girl desktop pet for Codex. It includes nine standard a
 
 Codex selects task states automatically. Hovering and dragging are direct pointer interactions; the other states follow Codex's current task status and do not require shortcut configuration in this repository.
 
-### Gaze directions
+### 22.5° turning
 
-The pet chooses the nearest gaze angle based on the pointer's position relative to the pet. Angles start at the top and increase clockwise, with one pose every 22.5 degrees:
+Codex calculates the pointer angle relative to the pet: 0° when the pointer is above it, then clockwise in 22.5° steps. The poses are sampled from the original 360° turn animation: 0° shows the front, 90° the right side, 180° the back, and 270° the left side.
 
-| Angle | Gaze | Angle | Gaze |
+| Angle | Facing | Angle | Facing |
 | ---: | --- | ---: | --- |
-| 000° | Up | 180° | Down |
-| 022.5° | Up-right | 202.5° | Down-left |
-| 045° | Up-right | 225° | Down-left |
-| 067.5° | Up-right | 247.5° | Down-left |
-| 090° | Right | 270° | Left |
-| 112.5° | Down-right | 292.5° | Up-left |
-| 135° | Down-right | 315° | Up-left |
-| 157.5° | Down-right | 337.5° | Up-left |
+| 000° | Front | 180° | Back |
+| 022.5° | Slightly right of front | 202.5° | Slightly left of back |
+| 045° | Front-right | 225° | Back-left |
+| 067.5° | Near right profile | 247.5° | Near left profile |
+| 090° | Right profile | 270° | Left profile |
+| 112.5° | Back-right | 292.5° | Front-left |
+| 135° | Near back | 315° | Near front |
+| 157.5° | Slightly right of back | 337.5° | Slightly left of front |
 
-When the pointer is in the neutral dead zone directly in front of the pet, Codex uses the normal idle animation; 000° is not used as a front-facing pose. The 16 poses form one clockwise loop.
+Codex shows direction frames only during idle, running, and waving. Hovering directly over the pet triggers jumping, while waiting, failed, and review also override the direction frames. To see the turn, move the pointer around the pet without hovering on it. Codex selects the nearest static pose in 22.5° steps; the atlas cannot change the selection rate or add runtime interpolation.
 
 ### Animation frames and atlas layout
 
-The atlas uses the Codex V2 format. It is 1536 × 2288 pixels, arranged as 8 columns × 11 rows of 192 × 208 pixel cells. The nine standard states each occupy one row; the final two rows contain the 16 gaze poses.
+The atlas uses the Codex V2 format. It is 1536 × 2288 pixels, arranged as 8 columns × 11 rows of 192 × 208 pixel cells. The nine standard states each occupy one row; the final two rows contain the 16 turning poses.
 
 | Row | State | Used frames | Frame duration |
 | ---: | --- | ---: | --- |
@@ -155,7 +160,7 @@ The atlas uses the Codex V2 format. It is 1536 × 2288 pixels, arranged as 8 col
 | 6 | waiting | 6 | First 5 frames: 150 ms each; final frame: 260 ms |
 | 7 | running | 6 | First 5 frames: 120 ms each; final frame: 220 ms |
 | 8 | review | 6 | First 5 frames: 150 ms each; final frame: 280 ms |
-| 9–10 | Gaze directions | 16 | Continuous clockwise angle sequence |
+| 9–10 | Turning poses | 16 | One frame every 22.5° clockwise |
 
 pet.json declares the pet ID, display name, V2 version, and atlas filename. Codex controls animation state selection and triggering.
 
@@ -178,12 +183,13 @@ Then open Codex **Settings → Appearance → Pets** and select **DeepSeek鲸鱼
 
 - pet.json: Codex pet manifest.
 - spritesheet.webp: transparent V2 animation atlas.
-- preview.png: preview of the states and gaze directions.
+- preview.png: preview of the states and turning poses.
+- turn-preview.gif: looping preview of all 16 angles.
 - NOTICE.md: source attribution and asset use terms.
 
 ### Validation
 
-The atlas passed Codex V2 dimension, cell-layout, and manifest checks, and passed independent visual review. A few intermediate diagonal gaze directions have minor readability notes; the four cardinal directions and the overall direction loop passed review.
+The atlas passed Codex V2 dimension, cell-layout, transparent-background, and manifest checks. The 16 turning frames come from one original 360° animation; the idle sequence no longer makes an abrupt late head turn, and the jump now includes descent and landing. A small hair-position difference remains where the last turn frame returns to the first.
 
 ### Source and usage terms
 

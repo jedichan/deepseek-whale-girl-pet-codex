@@ -10,13 +10,15 @@
 
 ![16 帧 360° 转身动图](turn-preview.gif)
 
+![重新制作的 jumping 动画预览](jumping-preview.gif)
+
 ### 功能与触发状态
 
 | Codex 状态 | 图集动画 | 触发方式与表现 |
 | --- | --- | --- |
 | 默认 / 空闲 | idle | 没有其他状态覆盖时使用；任务结束且结果已读后回到轻微呼吸、眨眼的待机循环。 |
 | Codex 唤醒 | waving | Codex 首次唤醒时挥手问候。 |
-| 悬停 | jumping | 鼠标指针悬停在宠物上时触发：蓄势、起跳、落地并恢复。 |
+| 悬停 | jumping | 鼠标指针悬停在宠物上时触发：蹲身、起跳、最高点、下降、落地。Codex 播放三轮后回到待机；鼠标离开宠物区域会立即中断。 |
 | 拖动向右 | running-right | 按住并拖动宠物向右移动时播放。 |
 | 拖动向左 | running-left | 按住并拖动宠物向左移动时播放。 |
 | 任务进行中 | running | Codex 有待处理或正在执行的任务时播放；这是“忙碌 / 正在工作”循环，不表示宠物真的在跑。 |
@@ -60,7 +62,7 @@
 | 8 | review | 6 | 前 5 帧各 150 ms，末帧 280 ms |
 | 9–10 | 转身方向 | 16 | 顺时针每 22.5° 一帧 |
 
-pet.json 声明宠物 ID、显示名称、V2 版本号和图集文件名。动画状态及其触发由 Codex 控制。当前客户端固定让 jumping 播放 5 格，前 4 格各 140 ms，最后一格 280 ms；只替换图集无法增加它读取的帧数。
+pet.json 声明宠物 ID、显示名称、V2 版本号和图集文件名。动画状态及其触发由 Codex 控制。当前客户端固定让 jumping 播放 5 格，前 4 格各 140 ms，最后一格 280 ms；只替换图集无法增加它读取的帧数。新版第 5 格为落地蹲身姿势，避免一轮还没播完就看起来回到待机。
 
 ### 安装到 Codex
 
@@ -83,11 +85,12 @@ macOS 或 Linux 可以在仓库目录运行：
 - spritesheet.webp：透明背景的 V2 动画图集。
 - preview.png：状态及转身姿态预览图。
 - turn-preview.gif：16 个角度循环预览。
+- jumping-preview.gif：重新制作的跳跃动作预览。
 - NOTICE.md：来源署名与素材使用说明。
 
 ### 校验情况
 
-图集已按 Codex V2 的尺寸、格数、透明背景和清单格式校验。16 个转身帧来自同一段原版 360° 动画；待机帧去掉了末段突然转头，跳跃帧补齐下降和落地。转身的末帧切回首帧时，头发仍有轻微摆动差异。
+图集已按 Codex V2 的尺寸、格数、透明背景和清单格式校验。16 个转身帧来自同一段原版 360° 动画；待机帧去掉了末段突然转头，跳跃帧重新绘制了蹲身到落地的完整动作。转身的末帧切回首帧时，头发仍有轻微摆动差异。
 
 ### 来源与授权
 
@@ -112,13 +115,15 @@ This is a DeepSeek whale-girl desktop pet for Codex. It includes nine standard a
 
 ![16-frame 360-degree turn](turn-preview.gif)
 
+![Reworked jumping animation preview](jumping-preview.gif)
+
 ### Features and triggers
 
 | Codex state | Atlas animation | Trigger and behavior |
 | --- | --- | --- |
 | Default / idle | idle | Used when no other state overrides it; returns to a subtle breathing and blinking loop after a task is finished and its result has been read. |
 | Codex wakes | waving | Greets with a wave when Codex first wakes up. |
-| Hover | jumping | Starts when the pointer hovers over the pet: anticipation, jump, landing, and recovery. |
+| Hover | jumping | Starts when the pointer hovers over the pet: crouch, takeoff, apex, descent, and landing. Codex returns to idle after three cycles; leaving the pet area interrupts it immediately. |
 | Drag right | running-right | Plays while the pet is held and dragged to the right. |
 | Drag left | running-left | Plays while the pet is held and dragged to the left. |
 | Task in progress | running | Plays while Codex has a pending or active task. This is a “busy / working” loop, not literal running. |
@@ -162,7 +167,7 @@ The atlas uses the Codex V2 format. It is 1536 × 2288 pixels, arranged as 8 col
 | 8 | review | 6 | First 5 frames: 150 ms each; final frame: 280 ms |
 | 9–10 | Turning poses | 16 | One frame every 22.5° clockwise |
 
-pet.json declares the pet ID, display name, V2 version, and atlas filename. Codex controls animation state selection and triggering. The current client plays exactly five jumping cells: 140 ms each for the first four, then 280 ms for the last. Replacing the atlas alone cannot increase the number of cells it reads.
+pet.json declares the pet ID, display name, V2 version, and atlas filename. Codex controls animation state selection and triggering. The current client plays exactly five jumping cells: 140 ms each for the first four, then 280 ms for the last. Replacing the atlas alone cannot increase the number of cells it reads. The revised fifth cell remains a crouched landing pose so the jump no longer appears to return to idle before its cycle ends.
 
 ### Install in Codex
 
@@ -185,11 +190,12 @@ Then open Codex **Settings → Appearance → Pets** and select **DeepSeek鲸鱼
 - spritesheet.webp: transparent V2 animation atlas.
 - preview.png: preview of the states and turning poses.
 - turn-preview.gif: looping preview of all 16 angles.
+- jumping-preview.gif: preview of the revised jumping action.
 - NOTICE.md: source attribution and asset use terms.
 
 ### Validation
 
-The atlas passed Codex V2 dimension, cell-layout, transparent-background, and manifest checks. The 16 turning frames come from one original 360° animation; the idle sequence no longer makes an abrupt late head turn, and the jump now includes descent and landing. A small hair-position difference remains where the last turn frame returns to the first.
+The atlas passed Codex V2 dimension, cell-layout, transparent-background, and manifest checks. The 16 turning frames come from one original 360° animation; the idle sequence no longer makes an abrupt late head turn, and the jump has been redrawn from crouch through landing. A small hair-position difference remains where the last turn frame returns to the first.
 
 ### Source and usage terms
 

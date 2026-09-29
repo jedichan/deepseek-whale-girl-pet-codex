@@ -28,7 +28,7 @@
 
 ### 22.5° 转身
 
-Codex 根据鼠标相对宠物的位置计算角度：指针在上方时为 0°，顺时针每 22.5° 选取一帧。这里用原版 360° 转身动画逐帧取样，0° 显示正面、90° 显示右侧、180° 显示背面、270° 显示左侧：
+图集提供 16 个方向姿态，供 Codex 按目标点相对宠物的位置选取：上方为 0°，顺时针每 22.5° 一帧。姿态取自原版 360° 转身动画，0° 显示正面、90° 显示右侧、180° 显示背面、270° 显示左侧：
 
 | 角度 | 转身姿态 | 角度 | 转身姿态 |
 | ---: | --- | ---: | --- |
@@ -41,7 +41,7 @@ Codex 根据鼠标相对宠物的位置计算角度：指针在上方时为 0°�
 | 135° | 接近背面 | 315° | 接近正面 |
 | 157.5° | 背面稍向右 | 337.5° | 正面稍向左 |
 
-Codex 只在 idle、running、waving 状态显示方向帧；悬停在宠物身上会触发 jumping，等待、失败和结果检查等状态也会覆盖方向帧。体验转身时，请把鼠标放在宠物周围、不要压在宠物图像上。Codex 按 22.5° 选取最接近的一张静态帧，图集本身无法修改选帧速度或增加帧间补间。
+当前 Codex 版本把应用内目标点（例如编辑器插入点或电脑操作光标）传给方向选择逻辑；它没有把普通鼠标移动位置传给这 16 帧。因此，鼠标绕宠物移动不会让宠物原地转身。方向帧只会在 idle、running、waving 状态显示；悬停触发的 jumping 等状态会覆盖方向帧。宠物图集无法添加鼠标跟随逻辑或修改选帧速度。
 
 ### 动画帧与图集布局
 
@@ -60,7 +60,7 @@ Codex 只在 idle、running、waving 状态显示方向帧；悬停在宠物身�
 | 8 | review | 6 | 前 5 帧各 150 ms，末帧 280 ms |
 | 9–10 | 转身方向 | 16 | 顺时针每 22.5° 一帧 |
 
-pet.json 声明宠物 ID、显示名称、V2 版本号和图集文件名。动画状态及其触发由 Codex 控制。
+pet.json 声明宠物 ID、显示名称、V2 版本号和图集文件名。动画状态及其触发由 Codex 控制。当前客户端固定让 jumping 播放 5 格，前 4 格各 140 ms，最后一格 280 ms；只替换图集无法增加它读取的帧数。
 
 ### 安装到 Codex
 
@@ -130,7 +130,7 @@ Codex selects task states automatically. Hovering and dragging are direct pointe
 
 ### 22.5° turning
 
-Codex calculates the pointer angle relative to the pet: 0° when the pointer is above it, then clockwise in 22.5° steps. The poses are sampled from the original 360° turn animation: 0° shows the front, 90° the right side, 180° the back, and 270° the left side.
+The atlas provides 16 directional poses for Codex to select from a target point relative to the pet: 0° above it, then clockwise in 22.5° steps. The poses are sampled from the original 360° turn animation: 0° shows the front, 90° the right side, 180° the back, and 270° the left side.
 
 | Angle | Facing | Angle | Facing |
 | ---: | --- | ---: | --- |
@@ -143,7 +143,7 @@ Codex calculates the pointer angle relative to the pet: 0° when the pointer is 
 | 135° | Near back | 315° | Near front |
 | 157.5° | Slightly right of back | 337.5° | Slightly left of front |
 
-Codex shows direction frames only during idle, running, and waving. Hovering directly over the pet triggers jumping, while waiting, failed, and review also override the direction frames. To see the turn, move the pointer around the pet without hovering on it. Codex selects the nearest static pose in 22.5° steps; the atlas cannot change the selection rate or add runtime interpolation.
+The current Codex version supplies an in-app target point, such as the editor caret or computer-use cursor, to the direction selector. It does not supply ordinary mouse movement to these 16 frames, so moving the mouse around the pet does not turn it in place. Direction frames appear only during idle, running, and waving; jumping and other states override them. A pet atlas cannot add mouse-tracking logic or change the frame-selection rate.
 
 ### Animation frames and atlas layout
 
@@ -162,7 +162,7 @@ The atlas uses the Codex V2 format. It is 1536 × 2288 pixels, arranged as 8 col
 | 8 | review | 6 | First 5 frames: 150 ms each; final frame: 280 ms |
 | 9–10 | Turning poses | 16 | One frame every 22.5° clockwise |
 
-pet.json declares the pet ID, display name, V2 version, and atlas filename. Codex controls animation state selection and triggering.
+pet.json declares the pet ID, display name, V2 version, and atlas filename. Codex controls animation state selection and triggering. The current client plays exactly five jumping cells: 140 ms each for the first four, then 280 ms for the last. Replacing the atlas alone cannot increase the number of cells it reads.
 
 ### Install in Codex
 

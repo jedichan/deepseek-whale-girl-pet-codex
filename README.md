@@ -92,13 +92,13 @@ macOS 或 Linux 可以在仓库目录运行：
 
 ### 分享这个 Git 仓库
 
-本地分发时，可以把 deepseek-whale-girl-codex.bundle 这个 bundle 文件和仓库一起发给接收者。接收者收到 bundle 后运行：
+本地分发时，可以把 deepseek-whale-girl-pet-codex.bundle 这个 bundle 文件和仓库一起发给接收者。接收者收到 bundle 后运行：
 
-    git clone deepseek-whale-girl-codex.bundle deepseek-whale-girl-codex
+    git clone deepseek-whale-girl-pet-codex.bundle deepseek-whale-girl-pet-codex
 
 若要发布到自己的 GitHub 仓库，先在 GitHub 创建空仓库，再在本仓库运行：
 
-    git remote add origin https://github.com/YOUR_GITHUB_USERNAME/deepseek-whale-girl-codex.git
+    git remote add origin https://github.com/YOUR_GITHUB_USERNAME/deepseek-whale-girl-pet-codex.git
     git push -u origin main
 
 ## English
@@ -191,11 +191,11 @@ The character and animation assets come from [PC2005-cloud/dsh-pet](https://gith
 
 ### Share this Git repository
 
-For local distribution, send the deepseek-whale-girl-codex.bundle file with the repository. After receiving the bundle, the recipient can run:
+For local distribution, send the deepseek-whale-girl-pet-codex.bundle file with the repository. After receiving the bundle, the recipient can run:
 
-    git clone deepseek-whale-girl-codex.bundle deepseek-whale-girl-codex
+    git clone deepseek-whale-girl-pet-codex.bundle deepseek-whale-girl-pet-codex
 
 To publish it to your own GitHub repository, create an empty repository on GitHub, then run this from the repository:
 
-    git remote add origin https://github.com/YOUR_GITHUB_USERNAME/deepseek-whale-girl-codex.git
+    git remote add origin https://github.com/YOUR_GITHUB_USERNAME/deepseek-whale-girl-pet-codex.git
     git push -u origin main

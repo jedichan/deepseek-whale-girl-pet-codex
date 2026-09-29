@@ -1,7 +1,7 @@
 {
   "id": "dsh-pet-maid",
   "displayName": "DeepSeek鲸鱼娘桌宠codex版",
-  "description": "The DeepSeek whale-girl desktop pet adapted from PC2005-cloud/dsh-pet for Codex.",
+  "description": "The DeepSeek whale-girl desktop pet for Codex.",
   "spriteVersionNumber": 2,
   "spritesheetPath": "spritesheet.webp"
 }

@@ -4,7 +4,7 @@
 
 ## 中文
 
-这是将 [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) 中的 DeepSeek 鲸鱼娘整理成 Codex 可用的桌宠版本。九种标准动画使用上游角色动画素材；Codex V2 图集还包含 16 个注视方向。此仓库提供可安装文件、预览和完整的状态说明，不包含网站或插件运行时。
+这是为 Codex 制作的 DeepSeek 鲸鱼娘桌宠。它包含九种标准动画和 16 个注视方向，并提供可安装文件、预览和完整的状态说明；不包含网站或插件运行时。
 
 ![DeepSeek 鲸鱼娘动画与注视方向预览](preview.png)
 
@@ -88,7 +88,7 @@ macOS 或 Linux 可以在仓库目录运行：
 
 ### 来源与授权
 
-角色和动画素材来源于 [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet)，基准提交为 631c5310b047931404978152fdc7865413c153ec。分享或展示时请保留 NOTICE.md 并注明来源。上游说明将代码标为 MIT，但动画素材和提示词仅允许开源使用并禁止商业使用；这不代表本仓库内的角色图像可按 MIT 商用。详情请以 [上游仓库说明](https://github.com/PC2005-cloud/dsh-pet) 为准。
+素材署名、来源和使用条件请见 NOTICE.md。分享或展示本桌宠时请保留该文件，并遵守其中的非商业使用要求。
 
 ### 分享这个 Git 仓库
 
@@ -103,7 +103,7 @@ macOS 或 Linux 可以在仓库目录运行：
 
 ## English
 
-This repository adapts the DeepSeek whale-girl character from [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) as a custom GPT pet for Codex. Its nine standard animations use the upstream character animation assets. The Codex V2 atlas also includes 16 gaze directions. This repository contains the installable files, a preview, and a full state guide; it does not contain the website or a plugin runtime.
+This is a DeepSeek whale-girl desktop pet for Codex. It includes nine standard animations and a 16-direction gaze atlas, plus installable files, a preview, and a full state guide. It does not include website or plugin runtime code.
 
 ![DeepSeek whale-girl animation and gaze preview](preview.png)
 
@@ -187,7 +187,7 @@ The atlas passed Codex V2 dimension, cell-layout, and manifest checks, and passe
 
 ### Source and usage terms
 
-The character and animation assets come from [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet), based on commit 631c5310b047931404978152fdc7865413c153ec. Keep NOTICE.md and credit the source when sharing or displaying this package. The upstream repository identifies its code as MIT licensed, but its animation assets and prompts are allowed for open-source use and prohibited for commercial use. This does not make the character artwork in this repository available for commercial use under MIT. See the [upstream repository](https://github.com/PC2005-cloud/dsh-pet) for its terms.
+See NOTICE.md for asset attribution, source information, and usage terms. Keep that file when sharing or displaying this pet, and follow its non-commercial use requirements.
 
 ### Share this Git repository
 
